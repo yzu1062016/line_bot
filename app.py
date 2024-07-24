@@ -51,9 +51,16 @@ def handle_message(event):
     else:
         reply_message = TextSendMessage(text=msg)
         
-    line_bot_api.reply_message_with_http_info(
-        ReplyMessageRequest(reply_token=event.reply_token, messages=[reply_message])
-    )
+    try:
+        app.logger.info(f"Reply token: {event.reply_token}")
+        app.logger.info(f"Reply message: {reply_message}")
+
+        request_data = ReplyMessageRequest(reply_token=event.reply_token, messages=[reply_message])
+        app.logger.info(f"Request data: {request_data}")
+
+        line_bot_api.reply_message_with_http_info(request_data)
+    except Exception as e:
+        app.logger.error(f"Error occurred: {e}")
         
 if __name__ == "__main__":
     app.run()

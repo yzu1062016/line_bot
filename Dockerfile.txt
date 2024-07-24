@@ -1,0 +1,19 @@
+# 使用官方 Python 3.12 輕量級基礎映像
+FROM python:3.12.4
+
+# 設置工作目錄
+WORKDIR /app
+
+# 複製需求文件並安裝依賴
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
+
+# 複製應用代碼
+COPY . .
+
+# 設置環境變數（可選）
+# ENV FLASK_APP=app.py
+# ENV FLASK_RUN_HOST=0.0.0.0
+
+# 運行應用（這裡使用 flask run 是為了開發環境，如果是生產環境應使用 gunicorn）
+CMD ["python", "app.py"]

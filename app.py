@@ -5,8 +5,6 @@ from linebot.v3.messaging import Configuration, ApiClient, MessagingApi, ReplyMe
 from linebot.v3.webhooks import MessageEvent, TextMessageContent
 from linebot.models import MessageEvent, TextMessage, TextSendMessage, QuickReply, QuickReplyButton, MessageAction
 
-import os
-
 app = Flask(__name__)
 
 configuration = Configuration(access_token='SVStz7rysHeyn016ATPULogdP+1Hv35X4WxsZpISb2gxthTRpgtCw6IGQftmURa+R+wwTGi/EW/tWOujmqLe7XkwGEW7h/nAJGhlglP9ldUc1lOVPukZBgboMNbAd5dFIllzpaneLZql9KmID4pOpAdB04t89/1O/w1cDnyilFU=')
@@ -56,7 +54,5 @@ def handle_message(event):
             ReplyMessageRequest(reply_token=event.reply_token, messages=[reply_message])
         )
         
-import os
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run()

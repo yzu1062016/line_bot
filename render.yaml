@@ -17,7 +17,7 @@ services:
 #   env: python
 #   repo: https://github.com/line/line-bot-sdk-python.git
 #   buildCommand: cd examples/flask-echo;pip install gunicorn -r requirements.txt
-#   startCommand: cd examples/flask-echo;gunicorn app_with_handler:app
+#   startCommand: cd examples/flask-echo;gunicorn app:app
 #   plan: free
 #   autoDeploy: false
 #   envVars:

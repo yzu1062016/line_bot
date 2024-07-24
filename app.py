@@ -5,6 +5,8 @@ from linebot.v3.messaging import Configuration, ApiClient, MessagingApi, ReplyMe
 from linebot.v3.webhooks import MessageEvent, TextMessageContent
 from linebot.models import MessageEvent, TextMessage, TextSendMessage, QuickReply, QuickReplyButton, MessageAction
 from linebot.models.responses import ReplyMessageRequest
+from waitress import serve
+from your_flask_app import app
 
 app = Flask(__name__)
 

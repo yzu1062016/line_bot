@@ -10,6 +10,9 @@ app = Flask(__name__)
 configuration = Configuration(access_token='SVStz7rysHeyn016ATPULogdP+1Hv35X4WxsZpISb2gxthTRpgtCw6IGQftmURa+R+wwTGi/EW/tWOujmqLe7XkwGEW7h/nAJGhlglP9ldUc1lOVPukZBgboMNbAd5dFIllzpaneLZql9KmID4pOpAdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('edd73f046ddd46fde4d3d9c8c495d7db')
 
+# 初始化MessagingApi
+api_client = ApiClient(configuration)
+line_bot_api = MessagingApi(api_client)
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -48,13 +51,9 @@ def handle_message(event):
     else:
         reply_message = TextSendMessage(text=msg)
         
-    line_bot_api.reply_message(event.reply_token, reply_message)
-
-    with ApiClient(configuration) as api_client:
-        line_bot_api = MessagingApi(api_client)
-        line_bot_api.reply_message_with_http_info(
-            ReplyMessageRequest(reply_token=event.reply_token, messages=[reply_message])
-        )
+    line_bot_api.reply_message_with_http_info(
+        ReplyMessageRequest(reply_token=event.reply_token, messages=[reply_message])
+    )
         
 if __name__ == "__main__":
     app.run()

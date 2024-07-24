@@ -46,7 +46,9 @@ def handle_message(event):
             )
         )
     else:
-        reply_message = TextMessage(text=msg)
+        reply_message = TextSendMessage(text=msg)
+        
+    line_bot_api.reply_message(event.reply_token, reply_message)
 
     with ApiClient(configuration) as api_client:
         line_bot_api = MessagingApi(api_client)

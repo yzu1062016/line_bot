@@ -33,7 +33,7 @@ def callback():
     return 'OK'
 
 
-@handler.add(MessageEvent, message=TextMessageContent)
+@handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     msg = event.message.text
 
@@ -51,16 +51,9 @@ def handle_message(event):
     else:
         reply_message = TextSendMessage(text=msg)
         
-    try:
-        app.logger.info(f"Reply token: {event.reply_token}")
-        app.logger.info(f"Reply message: {reply_message}")
-
-        request_data = ReplyMessageRequest(reply_token=event.reply_token, messages=[reply_message])
-        app.logger.info(f"Request data: {request_data}")
-
-        line_bot_api.reply_message_with_http_info(request_data)
-    except Exception as e:
-        app.logger.error(f"Error occurred: {e}")
+    line_bot_api.reply_message(
+         event.reply_token,[reply_message]
+    )
         
 if __name__ == "__main__":
     app.run()

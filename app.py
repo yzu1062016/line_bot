@@ -51,8 +51,8 @@ def handle_message(event):
     else:
         reply_message = TextSendMessage(text=msg)
         
-    line_bot_api.reply_message(
-         event.reply_token,[reply_message]
+    line_bot_api.reply_message_with_http_info(
+        ReplyMessageRequest('reply_token=event.reply_token, messages=[reply_message]')
     )
         
 if __name__ == "__main__":

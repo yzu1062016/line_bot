@@ -37,23 +37,15 @@ def callback():
 def handle_message(event):
     msg = event.message.text
 
-    if msg == '開始猜拳':
-        reply_message = TextSendMessage(
-            text='選擇一個動作',
-            quick_reply=QuickReply(
-                items=[
-                    QuickReplyButton(action=MessageAction(label='剪刀', text='剪刀')),
-                    QuickReplyButton(action=MessageAction(label='石頭', text='石頭')),
-                    QuickReplyButton(action=MessageAction(label='布', text='布'))
-                ]
-            )
-        )
-    else:
-        reply_message = TextSendMessage(text=msg)
+    if msg == '@status':
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text='This is keyword for @status!'))
         
-    line_bot_api.reply_message_with_http_info(
-        ReplyMessageRequest('reply_token=event.reply_token, messages=[reply_message]')
-    )
+    else:
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text='Please input valid keyword!'))
         
 if __name__ == "__main__":
     app.run()
